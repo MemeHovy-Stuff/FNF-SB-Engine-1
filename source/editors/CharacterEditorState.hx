@@ -44,9 +44,6 @@ import sys.FileSystem;
 
 using StringTools;
 
-/**
-	*DEBUG MODE
- */
 class CharacterEditorState extends MusicBeatState
 {
 	var char:Character;
@@ -84,7 +81,8 @@ class CharacterEditorState extends MusicBeatState
 
 	override function create()
 	{
-		//FlxG.sound.playMusic(Paths.music('breakfast'), 0.5);
+	    Paths.clearStoredMemory();
+		Paths.clearUnusedMemory();
 
 		camEditor = new FlxCamera();
 		camHUD = new FlxCamera();

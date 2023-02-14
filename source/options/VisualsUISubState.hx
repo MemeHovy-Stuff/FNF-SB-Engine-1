@@ -41,6 +41,13 @@ class VisualsUISubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 
+		var option:Option = new Option('Hide Watermark',
+			'If checked, hides watermark in left-bottom corner while playing song',
+			'hideWatermark',
+			'bool',
+			false);
+		addOption(option);
+
 		var option:Option = new Option('Hide HUD',
 			'If checked, hides most HUD elements.',
 			'hideHud',
@@ -54,6 +61,14 @@ class VisualsUISubState extends BaseOptionsMenu
 			'string',
 			'Time Left',
 			['Time Left', 'Time Elapsed', 'Song Name', 'Disabled']);
+		addOption(option);
+
+		var option:Option = new Option('Icon Bounce',
+			'Classic is Vanilla FnF icons bops, SB iS SB Engine icons bounce',
+			'iconBounce',
+			'string',
+			'SB',
+			['SB', 'Classic']);
 		addOption(option);
 
 		var option:Option = new Option('Flashing Lights',

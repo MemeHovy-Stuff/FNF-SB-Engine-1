@@ -25,11 +25,14 @@ import openfl.system.System;
 @:fileXml('tags="haxe,release"')
 @:noDebug
 #end
+
+enum GLInfo
+{
+	RENDERER;
+	SHADING_LANGUAGE_VERSION;
+}
 class FPS extends TextField
 {
-	/**
-		The current frame rate, expressed using frames-per-second
-	**/
 	public var currentFPS(default, null):Int;
 
 	@:noCompletion private var cacheCount:Int;
@@ -49,7 +52,7 @@ class FPS extends TextField
 		defaultTextFormat = new TextFormat("_sans", 14, color);
 		autoSize = LEFT;
 		multiline = true;
-		text = "FPS: ";
+		text = "Frame per second: ";
 
 		cacheCount = 0;
 		currentTime = 0;
@@ -82,12 +85,21 @@ class FPS extends TextField
 
 		if (currentCount != cacheCount /*&& visible*/)
 		{
-			text = "FPS: " + currentFPS;
+			text = "Frame per second: " + currentFPS;
 			var memoryMegas:Float = 0;
 			
 			#if openfl
 			memoryMegas = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 1));
-			text += "\nMemory: " + memoryMegas + " MB";
+			text += "\nRam memory: " + memoryMegas + " megabyte's";
+			text += "\nSB Engine version: " + MainMenuState.sbEngineVersion;
+			#if CHECK_FOR_UPDATES
+			if (MainMenuState.sbEngineVersion != TitleState.updateVersion) {
+				text += "\nSB Engine Update it's available!";
+			}
+			#end
+			text += "\nOperating system: " + '${lime.system.System.platformLabel} ${lime.system.System.platformVersion}';
+			text += "\nGL Render: " + '${getGLInfo(RENDERER)}';
+			text += "\nGLShading Version: " + '${getGLInfo(SHADING_LANGUAGE_VERSION)})';
 			#end
 
 			textColor = 0xFFFFFFFF;
@@ -107,4 +119,19 @@ class FPS extends TextField
 
 		cacheCount = currentCount;
 	}
+	private function getGLInfo(info:GLInfo):String
+		{
+			@:privateAccess
+			var gl:Dynamic = Lib.current.stage.context3D.gl;
+	
+			switch (info)
+			{
+				case RENDERER:
+					return Std.string(gl.getParameter(gl.RENDERER));
+				case SHADING_LANGUAGE_VERSION:
+					return Std.string(gl.getParameter(gl.SHADING_LANGUAGE_VERSION));
+			}
+	
+			return '';
+		}
 }

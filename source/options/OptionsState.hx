@@ -70,12 +70,17 @@ class OptionsState extends MusicBeatState
 	var selectorRight:Alphabet;
 
 	override function create() {
+
+	    Paths.clearStoredMemory();
+		Paths.clearUnusedMemory();
+
+
 		#if desktop
 		DiscordClient.changePresence("Options Menu", null);
 		#end
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-		bg.color = 0xFFea71fd;
+		bg.color = 0xFFFFA500;
 		bg.updateHitbox();
 
 		bg.screenCenter();

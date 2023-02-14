@@ -198,8 +198,6 @@ class ChartingState extends MusicBeatState
 		192
 	];
 
-
-
 	var text:String = "";
 	public static var vortex:Bool = false;
 	public var mouseQuant:Bool = false;
@@ -230,7 +228,8 @@ class ChartingState extends MusicBeatState
 			PlayState.SONG = _song;
 		}
 
-		// Paths.clearMemory();
+	    Paths.clearStoredMemory();
+		Paths.clearUnusedMemory();
 
 		#if desktop
 		// Updating Discord Rich Presence
@@ -241,7 +240,7 @@ class ChartingState extends MusicBeatState
 		ignoreWarnings = FlxG.save.data.ignoreWarnings;
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.scrollFactor.set();
-		bg.color = 0xFF222222;
+		bg.color = 0xFFA500;
 		add(bg);
 
 		gridLayer = new FlxTypedGroup<FlxSprite>();

@@ -37,6 +37,9 @@ class MasterEditorMenu extends MusicBeatState
 
 	override function create()
 	{
+	    Paths.clearStoredMemory();
+		Paths.clearUnusedMemory();
+
 		FlxG.camera.bgColor = FlxColor.BLACK;
 		#if desktop
 		// Updating Discord Rich Presence
@@ -45,7 +48,7 @@ class MasterEditorMenu extends MusicBeatState
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.scrollFactor.set();
-		bg.color = 0xFF353535;
+		bg.color = 0xFFFFA500;
 		add(bg);
 
 		grpTexts = new FlxTypedGroup<Alphabet>();
